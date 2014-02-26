@@ -18,7 +18,6 @@ public class PicPosterActivity extends Activity {
 
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 
-
 	EditText searchPostsEditText;
 	ImageView addPicImageView;
 	EditText addPicEditText;
@@ -76,7 +75,7 @@ public class PicPosterActivity extends Activity {
 	public void searchPosts(View view) {
 		String searchTerm = this.searchPostsEditText.getText().toString();
 		
-		//TODO : perform search, update model, etc
+		ElasticSearchOperations.pullPicPostModel(searchTerm, model, this);
 		
 		this.searchPostsEditText.setText(null);
 		this.searchPostsEditText.setHint(R.string.search_posts_edit_text_hint);

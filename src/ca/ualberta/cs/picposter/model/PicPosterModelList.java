@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import ca.ualberta.cs.picposter.ElasticSearchOperations;
+
 import android.graphics.Bitmap;
 import android.widget.ArrayAdapter;
 
@@ -27,6 +29,13 @@ public class PicPosterModelList {
 	public void addPicPost(Bitmap picture, String text, Date timestamp) {
 		//PicPostModel picPost = new PicPostModel(pic, text, timestamp);
 		PicPostModel picPost = new PicPostModel(text, timestamp);
+		this.list.add(picPost);
+		this.adapter.notifyDataSetChanged();
+		
+		ElasticSearchOperations.pushPicPostModel(picPost);
+	}
+	
+	public void readdPicPost(PicPostModel picPost) {
 		this.list.add(picPost);
 		this.adapter.notifyDataSetChanged();
 	}
