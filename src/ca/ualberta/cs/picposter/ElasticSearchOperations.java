@@ -16,9 +16,11 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import ca.ualberta.cs.picposter.model.PicPostModel;
@@ -32,7 +34,7 @@ public class ElasticSearchOperations
 			
 			@Override
 			public void run(){
-				Gson gson = new Gson();
+				Gson gson = new GsonBuilder().registerTypeAdapter(Bitmap.class, new BitmapSerializer()).create();
 				HttpClient client = new DefaultHttpClient();
 				HttpPost request = new HttpPost("http://cmput301.softwareprocess.es:8080/testing/mjnichols/");
 				
@@ -80,7 +82,7 @@ public class ElasticSearchOperations
 				// Http Connector
 				HttpClient httpclient = new DefaultHttpClient();
 				// JSON Utilities
-				final Gson gson = new Gson();
+				final Gson gson = new GsonBuilder().registerTypeAdapter(Bitmap.class, new BitmapSerializer()).create();
 
 				try
 				{
